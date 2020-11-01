@@ -1,0 +1,41 @@
+{% extends "item_tracker/base.html" %}
+{% block content %}
+<div>
+    <form method="post" autocomplete="off">
+      <div class="form-group">
+        <h4>Track new item:</h4>
+        <input type="url" class="form-control" name="item_url" placeholder="Enter URL">
+        <input type="submit" name="track_button" value="Add">
+        <input type="submit" name="refresh_button" value="Refresh">
+      </div>
+    </form>
+</div>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for item in items %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.name}}</h5>
+              <h6 class="card-text"> {{item.shop}} </h6>
+              <p class="card-text"> Current price: S${{item.current_price}} </p>
+              <p class="card-text"> Lowest price: S${{item.lowest_price}} </p>
+              <p class="card-text"> Original price: S${{item.original_price}} </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <form method='post'>
+                    <input type="submit" name="delete_button" value="Delete {{item.id}}">
+                  </form>
+                  <a href="{{item.link}}" target="_blank"><button>Go to shop</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
